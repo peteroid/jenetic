@@ -15,6 +15,7 @@ public class FitnessCalc {
     // with string of 0s and 1s
     static void setSolution(String newSolution) {
         solution = new byte[newSolution.length()];
+        Individual.setDefaultGeneLength(newSolution.length());
         // Loop through each character of our string and save it in our byte
         // array
         for (int i = 0; i < newSolution.length(); i++) {
@@ -25,6 +26,20 @@ public class FitnessCalc {
                 solution[i] = 0;
             }
         }
+    }
+
+    static void setSolutionString(String newSolution) {
+        byte[] bytes = newSolution.getBytes();
+        StringBuilder binary = new StringBuilder();
+        for (byte b : bytes) {
+            int val = b;
+            for (int i = 0; i < 8; i++) {
+                binary.append((val & 128) == 0 ? 0 : 1);
+                val <<= 1;
+            }
+        }
+        setSolution(binary.toString());
+        System.out.println(binary);
     }
 
     // Calculate inidividuals fittness by comparing it to our candidate solution

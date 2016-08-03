@@ -4,10 +4,10 @@
 public class Algorithm {
 
     /* GA parameters */
-    private static final double uniformRate = 0.5;
-    private static final double mutationRate = 0.015;
-    private static final int tournamentSize = 5;
-    private static final boolean elitism = true;
+    static double uniformRate = 0.5;
+    static double mutationRate = 0.01;
+    static int tournamentSize = 5;
+    static boolean elitism = true;
 
     /* Public methods */
 

@@ -1,9 +1,11 @@
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by peteroid on 8/1/16.
  */
 public class Individual {
 
-    static int defaultGeneLength = 64;
+    static int defaultGeneLength = 160;
     private byte[] genes = new byte[defaultGeneLength];
     // Cache
     private int fitness = 0;
@@ -38,10 +40,10 @@ public class Individual {
 
     public int getFitness() {
         if (fitness == 0) {
-            fitness = FitnessCalc.getFitness(this);
-        }
-        return fitness;
+        fitness = FitnessCalc.getFitness(this);
     }
+    return fitness;
+}
 
     @Override
     public String toString() {
@@ -51,4 +53,27 @@ public class Individual {
         }
         return geneString;
     }
+
+    public String getPhenoType() {
+        String type = "";
+
+        for (int i = 0; i < size(); i += 8) {
+            int val = 128;
+            char c = 0;
+            for (int j = i; j < i + 8; j++) {
+                c += (this.genes[j] * val);
+                val >>= 1;
+            }
+            type += c;
+//            System.out.print(' ');
+        }
+        return type;
+//        try {
+//            return new String(this.genes, "ASCII");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//            return "";
+//        }
+    }
+
 }
